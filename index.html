@@ -1,722 +1,308 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
+<title>20251111_201019_上下文工程如何助你的公司摆脱_ai_代码泛滥之困_来自_qodo_和_monday.com_的经验.md</title>
+<style type='text/css'>/* Claude-inspired Dark Theme for Markdown */
+
+:root {
+    --bg-primary: #2b2b2b;
+    --bg-secondary: #353535;
+    --bg-code: #3d3d3d;
+    --text-primary: #e8e6e3;
+    --text-secondary: #c4c2bf;
+    --text-tertiary: #9a9896;
+    --accent: #d4a574;
+    --accent-hover: #e0b588;
+    --border: #4a4a4a;
+    --link: #c9a87f;
+    --selection-bg: #4a4540;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family:
+        -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    padding: 40px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+::selection {
+    background-color: var(--selection-bg);
+    color: var(--text-primary);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    line-height: 1.3;
+    margin-top: 2em;
+    margin-bottom: 0.8em;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+h1 {
+    font-size: 1.4rem;
+    margin-top: 0;
+    /*border-bottom: 2px solid var(--border);*/
+    padding-bottom: 0.5em;
+}
+
+h2 {
+    font-size: 1.4rem;
+    /*border-bottom: 1px solid var(--border);*/
+    padding-bottom: 0.4em;
+}
+
+h3 {
+    font-size: 1.4rem;
+}
+
+h4 {
+    font-size: 1.2rem;
+}
+
+h5,
+h6 {
+    font-size: 1rem;
+}
+
+p {
+    margin: 1em 0;
+    color: var(--text-primary);
+}
+
+/* Links */
+a {
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.2s ease;
+}
+
+a:hover {
+    border-bottom: 1px solid var(--link);
+}
+
+/* Lists */
+ul,
+ol {
+    padding-left: 1.8em;
+    margin: 1em 0;
+}
+
+li {
+    margin: 0.4em 0;
+    color: var(--text-primary);
+}
+
+li > p {
+    margin: 0.3em 0;
+}
+
+/* Code blocks */
+code {
+    font-family:
+        "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+        "Courier New", monospace;
+    font-size: 0.9em;
+    background-color: var(--bg-code);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    color: #e8c4b8;
+}
+
+pre {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.2em;
+    overflow-x: auto;
+    margin: 1.5em 0;
+    line-height: 1.5;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid var(--accent);
+    padding: 0.5em 0 0.5em 1.5em;
+    margin: 1.5em 0;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-style: italic;
+    border-radius: 0 4px 4px 0;
+}
+
+blockquote p {
+    margin: 0.5em 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+    font-size: 0.95em;
+}
+
+th,
+td {
+    border: 1px solid var(--border);
+    padding: 0.75em 1em;
+    text-align: left;
+}
+
+th {
+    background-color: var(--bg-secondary);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+tr:nth-child(even) {
+    background-color: var(--bg-secondary);
+}
+
+/* Horizontal rule */
+hr {
+    border: none;
+    /*border-top: 2px solid var(--border);*/
+    margin: 2.5em 0;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin: 1.5em 0;
+    opacity: 0.9;
+}
+
+/* Task lists */
+input[type="checkbox"] {
+    margin-right: 0.5em;
+}
+
+/* Emphasis */
+strong {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+em {
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+/* Inline elements */
+mark {
+    background-color: #4a3d2a;
+    color: #f5d9a8;
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+}
+
+del {
+    color: var(--text-tertiary);
+    text-decoration: line-through;
+}
+
+/* Footnotes */
+.footnotes {
+    margin-top: 3em;
+    padding-top: 1.5em;
+    /*border-top: 2px solid var(--border);*/
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+/* Syntax highlighting adjustments for dark theme */
+.hljs {
+    background: var(--bg-code);
+    color: var(--text-primary);
+}
+
+</style>
+
+
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<article class='markdown-body'>
+<h1 id="上下文工程如何助你的公司摆脱-ai-代码泛滥之困来自-qodo-和-mondaycom-的经验">上下文工程如何助你的公司摆脱 AI 代码泛滥之困：来自 Qodo 和 Monday.com 的经验</h1>
+<p><em>Carl Franzen</em></p>
+<p>随着云端项目追踪软件 <a href="https://monday.com/">monday.com</a> 的工程组织规模扩大到 500 多名开发者，团队开始感受到成功带来的压力。产品线日益增多，微服务激增，代码提交的速度已经超过了人工审查所能跟上的节奏。公司需要一种方法来审查每月数千个拉取请求，既不能让开发者陷入繁琐工作的泥潭，也不能让质量下滑。</p>
+<p>就在那时，研发副总裁兼 Growth 和 monday Dev 团队负责人 Guy Regev 开始尝试一款来自 <a href="https://www.qodo.ai/">Qodo</a> 的新 AI 工具，Qodo 是一家专注于 AI 智能体的以色列初创公司。正如 Qodo 和 monday.com 今日联合发布的一份<a href="https://www.qodo.ai/blog/monday-com-accelerates-review-cycles-and-improves-code-quality-with-qodo/">新案例研究</a>所揭示的，这次最初只是轻量级的测试，很快就成为了 monday.com 软件交付基础设施的关键组成部分。</p>
+<p>“Qodo 感觉不像又一个工具——它更像是为团队增添了一位真正了解我们工作方式的新成员，” Regev 在最近一次视频采访中告诉 VentureBeat，并补充说它“每月阻止了超过 800 个问题流入生产环境——其中一些本可能导致严重的安全漏洞。”</p>
+<p>与 GitHub Copilot 或 Cursor 这类代码生成工具不同，Qodo 并不试图编写新代码。相反，它专注于代码审查——利用其所谓的<strong>上下文工程</strong>来理解拉取请求中不仅改变了什么，还理解为何改变、如何与业务逻辑保持一致，以及是否遵循了内部最佳实践。</p>
+<p>“你可以调用 Claude Code 或 Cursor，五分钟内生成 1000 行代码，” Qodo 的联合创始人兼 CEO Itamar Friedman 在与 Regev 同一次的视频采访中说，“但你只有 40 分钟，根本审查不完。所以，你需要 Qodo 来帮你做审查。”</p>
+<p>对于 monday.com 来说，这项能力不仅仅是有帮助——它是变革性的。</p>
+<h2 id="规模化代码审查"><strong>规模化代码审查</strong></h2>
+<p>在任何一个时间点，monday.com 的开发者都在数百个代码库和服务中发布更新。工程组织在紧密协作的团队中工作，每个团队分别对齐产品的特定模块：市场营销、CRM、开发工具、内部平台等等。</p>
+<p>这正是 Qodo 发挥作用的地方。该公司的平台利用 AI 不仅检查明显的错误或风格违规，还评估拉取请求是否遵循团队特定的规范、架构指南和历史模式。</p>
+<p>它通过学习你自己的代码库来实现这一点——通过学习以往的 PR、评论、合并记录，甚至 Slack 对话来理解你的团队如何工作。</p>
+<p>“Qodo 给出的评论并非泛泛之谈——它们反映了我们的价值观、我们使用的库，甚至我们对功能开关和隐私等事务的标准，” Regev 说。“它具备上下文感知能力，这是传统工具所不具备的。”</p>
+<h2 id="上下文工程究竟意味着什么"><strong>“上下文工程”究竟意味着什么</strong></h2>
+<p>Qodo 将其独家秘诀称为<strong>上下文工程</strong>——这是一种系统级方法，用于管理模型在做决策时能看到的一切信息。</p>
+<p>这当然包括 PR 的代码差异，但也包括此前的讨论、相关文档、代码库中的相关文件，甚至测试结果和配置数据。</p>
+<p>这个想法是，大语言模型并不真正“思考”——它们根据给定的输入预测下一个 token。因此，它们输出的质量几乎完全取决于输入内容的质量和结构。</p>
+<p>正如 Qodo 的社区经理 Dana Fine 在一篇<a href="https://www.qodo.ai/blog/context-engineering/">博客文章</a>中所说：“你不仅仅是在写提示词，你是在固定的 token 限制下设计结构化的输入。每一个 token，都是一个设计决策。”</p>
+<p>这不只是理论。在 monday.com 的案例中，这意味着 Qodo 不仅能发现明显的错误，还能发现那些通常会逃过人工审查的细微问题——硬编码变量、缺失的回退机制，或是违反跨团队架构约定的情况。</p>
+<p>有一个例子很突出。在最近的一个 PR 中，Qodo 标记了一行无意中暴露了一个预发布环境变量的代码——这是任何人工审查者都没有发现的。如果它被合并，可能会在生产环境中引发问题。</p>
+<p>“我们修复这个安全漏洞以及它可能引发的法律问题所花费的时间，将远远超过我们从单个 PR 审查中节省下来的时间，” Regev 说。</p>
+<h2 id="集成到开发流程中"><strong>集成到开发流程中</strong></h2>
+<p>如今，Qodo 已深度集成到 monday.com 的开发工作流中，分析拉取请求，并根据以往的团队代码审查提供具备上下文感知的建议。</p>
+<p>“它感觉不像又一个工具……它感觉像另一位加入系统的队友——一位会学习我们工作方式的队友，” Regev 指出。</p>
+<p>开发者在审查过程中会收到建议，并保留对最终决策的控制权——这种“人机协同”模式对于工具的推广至关重要。</p>
+<p>由于 Qodo 通过拉取请求操作和评论直接集成到 GitHub，Monday.com 的基础设施团队没有面临陡峭的学习曲线。</p>
+<p>“它只是一个 GitHub action，” Regev 说。“它会创建一个包含测试的 PR。它不像一个我们必须学习的独立工具。”</p>
+<p>“其目的实际上是帮助开发者学习代码、承担责任、相互给予反馈，并从中学习、确立标准，” Friedman 补充道。</p>
+<h2 id="成果节省时间预防错误"><strong>成果：节省时间，预防错误</strong></h2>
+<p>自更广泛地推行 Qodo 以来，monday.com 在多个团队中都看到了可衡量的改进。</p>
+<p>内部分析显示，开发者平均每个 PR 大约能节省一个小时。将这个数字乘以每月数千个 PR，节省的时间很快就能达到每年数千个开发者小时。</p>
+<p>这些不仅仅是表面问题——许多都与业务逻辑、安全性或运行时稳定性有关。而且因为 Qodo 的建议反映了 monday.com 的实际约定，开发者更有可能采纳它们。</p>
+<p>系统的准确性根植于其以数据为先的设计。Qodo 基于每个公司的私有代码库和历史数据进行训练，以适应不同的团队风格和实践。它不依赖于一刀切的规则或外部数据集。一切都是量身定制的。</p>
+<h2 id="从内部工具到产品愿景"><strong>从内部工具到产品愿景</strong></h2>
+<p>Regev 的团队对 Qodo 的影响印象深刻，他们已经开始规划 Qodo 与 Monday Dev（monday.com 正在构建的面向开发者的产品线）之间的更深度的集成。</p>
+<p>其愿景是创建一个工作流，让业务上下文——任务、工单、客户反馈——能直接流入代码审查层。这样，审查者不仅可以评估代码是否“能用”，还可以评估它是否解决了正确的问题。</p>
+<p>“以前，我们有 linter、danger 规则、静态分析……都是基于规则的……你需要去配置所有规则，” Regev 说。“但它无法察觉你未曾意识到的问题……Qodo……感觉它正在从我们的工程师那里学习。”</p>
+<p>这与 Qodo 自身的产品路线图高度契合。该公司不仅审查代码，它正在构建一个完整的 AI 智能体平台——包括用于上下文感知代码生成的 Qodo Gen、用于自动化 PR 分析的 Qodo Merge，以及 Qodo Cover，这是一个利用运行时验证来确保测试覆盖率的回归测试智能体。</p>
+<p>所有这些都由 Qodo 自有的基础设施驱动，包括其新的开源嵌入模型 Qodo-Embed-1-1.5B，该模型在代码检索基准测试中，其表现超越了 OpenAI 和 Salesforce 提供的模型。</p>
+<h2 id="下一步是什么"><strong>下一步是什么？</strong></h2>
+<p>Qodo 目前正以免费增值模式提供其平台——对个人免费，通过 Google Cloud 的 Perks 计划为初创公司提供折扣，并为需要 SSO（单点登录）、气隙部署或高级控制功能的公司提供企业级服务。</p>
+<p>该公司已经与 NVIDIA、Intuit 和其他财富 500 强公司的团队合作。得益于最近与 Google Cloud 的合作关系，Qodo 的模型可直接在 Vertex AI 的 Model Garden 中使用，这使其更容易集成到企业流程中。</p>
+<p>“上下文引擎将成为 2026 年的重头戏，” Friedman 说。“如果企业想要真正理解并帮助他们的人工智能，就需要构建自己的‘第二大脑’。”</p>
+<p>随着 AI 系统在软件开发中变得越来越根深蒂固，像 Qodo 这样的工具正在向我们展示，在恰当的时机提供正确的上下文，将如何变革团队在整个企业范围内构建、交付和扩展代码的方式。</p>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
-        </div>
-    </section>
+</article>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
-
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
 </body>
-
 </html>
